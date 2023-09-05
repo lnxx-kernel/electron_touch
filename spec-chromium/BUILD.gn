@@ -2,7 +2,7 @@ import("//build/config/features.gni")
 import("//printing/buildflags/buildflags.gni")
 
 group("spec") {
-  testonly = true
+  testonly = false
 
   deps = [
     ":chromium_browsertests",
@@ -40,27 +40,11 @@ group("chromium_unittests") {
     "//ui/base:ui_base_unittests",
     "//ui/compositor:compositor_unittests",
     "//ui/display:display_unittests",
-    "//ui/events:events_unittests",
     "//ui/gl:gl_unittests",
     "//url:url_unittests",
     "//url/ipc:url_ipc_unittests",
     "//v8/test/unittests:unittests",
   ]
-
-  if (enable_printing) {
-    deps += [ "//printing:printing_unittests" ]
-  }
-
-  if (is_linux) {
-    deps += [
-      "//net:disk_cache_memory_test",
-      "//sandbox/linux:sandbox_linux_unittests",
-    ]
-
-    if (use_dbus) {
-      deps += [ "//dbus:dbus_unittests" ]
-    }
-  }
 }
 
 group("chromium_browsertests") {
